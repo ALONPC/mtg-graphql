@@ -4,7 +4,7 @@ const api = "https://api.magicthegathering.io/v1";
 
 const typeDefs = gql`
   type Card {
-    multiverseid: Int
+    multiverseid: ID
     name: String!
     cmc: Int
     type: String
@@ -14,25 +14,27 @@ const typeDefs = gql`
 
   type Query {
     cards: [Card]
-    getCard(multiverseid: Int!): Card
+    getCard(multiverseid: ID!): Card
   }
 `;
 
 const resolvers = {
   Query: {
-    cards: async (root, args) => {
+    cards: async () => {
       return await axios
         .get(`${api}/cards`)
-        .then((res) => res.data.cards)
+        .then(({ data: { cards } }) => cards)
         .catch((err) => console.log(`error ocurred ${err}`));
     },
-    getCard: async (root, args) => {
-      const { multiverseid } = args;
+    getCard: async (_, { multiverseid }) => {
       return await axios
         .get(`${api}/cards/${multiverseid}`)
-        .then((res) => res.data.card)
+        .then(({ data: { card } }) => {
+          console.log(`Card "${card.name}" found!`);
+          return card;
+        })
         .catch((err) => {
-          throw new Error(err);
+          console.log(`error ocurred ${err}`);
         });
     },
   },
