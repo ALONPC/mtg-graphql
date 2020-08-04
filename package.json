@@ -1,22 +1,14 @@
 {
-  "name": "create-next-example-app",
+  "name": "mtg-graphql",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "start": "nodemon server.js"
   },
   "dependencies": {
-    "apollo-boost": "^0.1.28",
     "apollo-server": "^2.4.2",
     "axios": "^0.18.0",
-    "graphql": "^14.1.1",
-    "graphql-tag": "^2.10.1",
-    "mtgsdk": "^0.4.2",
-    "net": "^1.0.2",
-    "next": "^8.0.1",
-    "react": "^16.8.2",
-    "react-apollo": "^2.4.1",
-    "react-dom": "^16.8.2",
-    "tls": "0.0.1"
+    "graphql": "^14.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
